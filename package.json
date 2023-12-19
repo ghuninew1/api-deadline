@@ -11,8 +11,8 @@
     },
     "scripts": {
         "dev": "nodemon --trace-deprecation --env-file=.env ./src/server.js",
-        "debug": "DEBUG=app:* nodemon --env-file=.env server.js",
-        "pm2": "pm2 start --env-file=.env server.js",
+        "debug": "DEBUG=app:* nodemon --env-file=.env /src/server.js",
+        "pm2": "pm2 start ecosystem.config.cjs",
         "devbun": "bun --watch run --env-file=.env server.js",
         "build2": "esbuild --bundle --minify --platform=node --target=node18 --outfile=get_sid.js utils/get_sid.js",
         "start": "node --env-file=.env server.js"
@@ -28,16 +28,13 @@
         "mongoose": "^8.0.3"
     },
     "devDependencies": {
-        "@types/node": "^20.10.4",
+        "@types/node": "^20.10.5",
         "morgan": "^1.10.0",
         "multer": "1.4.5-lts.1",
         "nodemailer": "^6.9.7",
         "nodemon": "^3.0.2",
         "ping": "^0.4.4",
-        "sharp": "^0.33.0"
+        "sharp": "^0.33.1"
     },
-    "keywords": [],
-    "engines": {
-        "node": ">=18.0.0"
-    }
+    "keywords": []
 }

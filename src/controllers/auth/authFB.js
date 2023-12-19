@@ -1,11 +1,11 @@
-import User from "#models/UserLine.js";
+import User from "#models/UserFB.js";
 import bcrypt from "bcryptjs";
 import createError from "#utils/createError.js";
 import jwt from "jsonwebtoken";
 
 const refreshSecret = process.env.JWT_REFRESH_TOKEN;
 
-const authLine = async (req, res, next) => {
+const authFB = async (req, res, next) => {
     try {
         const data = req.body;
         if (!data) return next(createError(400, "Please enter all fields"));

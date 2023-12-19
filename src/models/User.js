@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
-import { connectDBs } from "#models/index.js";
+import db from "#models/index.js";
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new db.mongoose.Schema(
     {
         username: {
             type: String,
@@ -35,6 +34,6 @@ const UserSchema = new mongoose.Schema(
         versionKey: false,
     }
 );
-const { userDB } = connectDBs();
+
 // export default mongoose.model("user", UserSchema);
-export default userDB.model("user", UserSchema);
+export default db.userDB.model("user", UserSchema);

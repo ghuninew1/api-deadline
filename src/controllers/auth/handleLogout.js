@@ -1,9 +1,8 @@
-import User from "#models/User.model.js";
+import User from "#models/User.js";
 import createError from "#utils/createError.js";
 
 const handleLogout = async (req, res, next) => {
     try {
-        // On client, also delete the accessToken
         const cookies = req.cookies["jwt"];
         if (!cookies) return res.sendStatus(204);
 

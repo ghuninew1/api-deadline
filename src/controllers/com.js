@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import createError from "#utils/createError.js";
-import Com from "#models/Com.model.js";
+import Com from "#models/Com.js";
 
 export async function list(req, res, next) {
     try {

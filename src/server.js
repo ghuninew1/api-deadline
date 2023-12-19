@@ -1,17 +1,18 @@
 import express from "express";
+import { createServer } from "node:http";
 import cors from "cors";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import createError from "#utils/createError.js";
+import corsOptions from "#utils/corsOptions.js";
 import {
     rootRoute,
     authRoute,
-    corsOptions,
     comRoute,
     deadlineRoute,
+    userRoute,
 } from "#routes/index.js";
-// import db from "#models/index.js";
 
 const app = express();
 app.disable("x-powered-by");
@@ -37,7 +38,18 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use("/", rootRoute, authRoute, comRoute, deadlineRoute);
+app.use("/", rootRoute, authRoute, comRoute, deadlineRoute, userRoute);
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+    const error = createError(404, "Not Found");
+    res.status(error.status).json({
+        status: error.status,
+        message: error.message,
+    });
+
+    next();
+});
 
 // error handler
 app.use((err, req, res, next) => {
@@ -50,10 +62,23 @@ app.use((err, req, res, next) => {
     next();
 });
 
-app.listen(process.env.PORT || 8800, () => {
+// server
+const server = createServer(app);
+server.timeout = 5000;
+server.keepAliveTimeout = 5000;
+server.headersTimeout = 5000;
+server.maxHeadersCount = 5000;
+server.maxConnections = 5000;
+server.listen(process.env.PORT || 3000);
+
+// server events
+server.on("error", (err) => {
+    console.log(err);
+});
+server.on("listening", () => {
     console.log(
-        `Server is running http://localhost:${process.env.PORT || 8800}`
+        `Server is running on http://localhost:${server.address().port}`
     );
 });
 
-export default app;
+export default server;

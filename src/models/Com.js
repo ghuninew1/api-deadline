@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
-import { connectDBs } from "#models/index.js";
+import db from "#models/index.js";
 
-const ComSchema = new mongoose.Schema(
+const ComSchema = new db.mongoose.Schema(
     {
         name: {
             type: String,
@@ -9,7 +8,6 @@ const ComSchema = new mongoose.Schema(
         user: {
             type: String,
         },
-
         ip: {
             type: String,
         },
@@ -51,9 +49,6 @@ const ComSchema = new mongoose.Schema(
     }
 );
 
-const { userDB } = connectDBs();
-
 // const Com = mongoose.model("Com", ComSchema);
-const Com = userDB.model("Com", ComSchema);
 
-export default Com;
+export default db.userDB.model("com", ComSchema);

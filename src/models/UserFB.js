@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
-import { connectDBs } from "#models/index.js";
+import db from "#models/index.js";
 
-const UserlineSchema = new mongoose.Schema(
+const UserFBSchema = new db.mongoose.Schema(
     {
         username: {
             type: String,
@@ -12,19 +11,7 @@ const UserlineSchema = new mongoose.Schema(
         password: {
             type: String,
         },
-        lineId: {
-            type: String,
-        },
-        aud: {
-            type: String,
-        },
-        exp: {
-            type: Number,
-        },
-        iat: {
-            type: Number,
-        },
-        iss: {
+        uid: {
             type: String,
         },
         roles: {
@@ -50,6 +37,6 @@ const UserlineSchema = new mongoose.Schema(
     }
 );
 
-const { userDB } = connectDBs();
 // export default mongoose.model("userline", UserlineSchema);
-export default userDB.model("userline", UserlineSchema);
+
+export default db.userDB.model("userfb", UserFBSchema);

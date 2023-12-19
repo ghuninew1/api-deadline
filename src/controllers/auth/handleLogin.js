@@ -1,8 +1,8 @@
-import User from "#models/User.model.js";
+import User from "#models/User.js";
 import bcrypt from "bcryptjs";
 import createError from "#utils/createError.js";
 
-const secret = process.env.JWT_SECRET;
+// const secret = process.env.JWT_SECRET;
 const refreshSecret = process.env.JWT_REFRESH_TOKEN;
 
 const handleLogin = async (req, res, next) => {
@@ -37,6 +37,7 @@ const handleLogin = async (req, res, next) => {
                     roles: foundUser.roles,
                     expires: foundUser.expires,
                     img: foundUser.img,
+                    refreshToken: foundUser.refreshToken,
                 });
             } else {
                 // create JWTs
@@ -64,6 +65,7 @@ const handleLogin = async (req, res, next) => {
                     roles: foundUser.roles,
                     expires: foundUser.expires,
                     img: foundUser.img,
+                    refreshToken: foundUser.refreshToken,
                 });
             }
         } else {
